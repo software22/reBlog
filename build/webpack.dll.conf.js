@@ -3,6 +3,8 @@ const webpack = require('webpack');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
+const config = require('../config/config')
+
 module.exports = {
     entry: {
         vue: ['vue/dist/vue.esm.js','vue-router','vuex','axios'],
