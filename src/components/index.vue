@@ -2,7 +2,9 @@
     <section>
         <div class="blog-index-bg-wrap" :style="{'height':clientHeight}">
             <div class="blog-index-bg-shade">
-                <FloatBall></FloatBall>
+                <transition name="fade">
+                    <FloatBall v-if="show"></FloatBall>
+                </transition>
             </div>
             <canvas id="canvas"></canvas>
         </div>
@@ -20,7 +22,8 @@ export default {
     data(){
         return {
             // clientWidth: '0px',
-            clientHeight: '0px'
+            clientHeight: '0px',
+            show: false
         }
     },
     components: {
@@ -38,6 +41,7 @@ export default {
         let ctx = canvas.getContext('2d');
         let meteorShower = new MeteorShower(canvas, ctx);
         meteorShower.start();
+        that.show = true;
     },
     methods:{
 
@@ -60,5 +64,11 @@ export default {
         width: 100%;
         height: 100%;
         background-color: rgba(0,0,0,0.4);
+    }
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity 1.5s;
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+        opacity: 0;
     }
 </style>
